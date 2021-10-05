@@ -4,6 +4,8 @@
 
 const calendar = document.querySelector('#app-calendar');
 const monthName = document.querySelector('#month-name');
+const previous = document.querySelector('#previous');
+const future = document.querySelector('#future');
 let year = new Date().getFullYear();
 let month = new Date().getMonth();
 let monthLong = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date(Date.UTC(year, month, 1)));
@@ -55,3 +57,4 @@ document.querySelectorAll('#app-calendar .day').forEach(day => {
 		event.currentTarget.classList.toggle("selected");
 	});
 });
+

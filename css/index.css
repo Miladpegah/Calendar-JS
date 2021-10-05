@@ -2,8 +2,26 @@
 	--ligth-gray: #DADCE0;
 	--ligth-blue: #1B9CE2;
 }
+.header{
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 
-#month-name {
+}
+.shift{
+	text-align: center;
+  	font-size: 12px;
+  	cursor: pionter;
+  	transition: background-color 200ms, color 200ms;
+  	padding-bottom: 1%;
+  	font-family: "Lucida Console", "Courier New", monospace;	
+  	color: var(--ligth-blue);
+}
+a {
+	text-decoration: none;
+  	color: var(--ligth-blue);
+}
+
+.month-name {
 	text-align: center;
   	font-size: 12px;
   	cursor: pionter;
