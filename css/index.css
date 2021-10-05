@@ -3,6 +3,16 @@
 	--ligth-blue: #1B9CE2;
 }
 
+#month-name {
+	text-align: center;
+  	font-size: 12px;
+  	cursor: pionter;
+  	transition: background-color 200ms, color 200ms;
+  	padding-bottom: 1%;
+  	font-family: "Lucida Console", "Courier New", monospace;
+
+}
+
 #app-calendar{
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
@@ -32,3 +42,4 @@
 	background-color: var(--ligth-blue);
 	color: white;
 }
+
