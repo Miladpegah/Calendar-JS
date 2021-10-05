@@ -1,9 +1,15 @@
 import {isWeekend} from "./helpers.js";
 import {getDayName} from "./helpers.js";
+import {getDaysInMonthUTC} from "./helpers.js";
 
 const calendar = document.querySelector('#app-calendar');
 
-for (let day = 1; day <= 31; day++){
+let year = new Date().getFullYear();
+let month = new Date().getMonth();
+
+let days = getDaysInMonthUTC(month, year);
+
+for (let day = 1; day <= days.length; day++){
 
 	const weekend = isWeekend(day);
 
