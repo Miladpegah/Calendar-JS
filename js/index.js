@@ -33,7 +33,7 @@ const getDaysInMonthUTC = (month, year) => {
   let date = new Date(Date.UTC(year, month, 1));
   let days = [];
   while (date.getUTCMonth() === month) {
-    days.push(new Date(date).getDate());
+    days.push(date.getDate());
     date.setUTCDate(date.getUTCDate() + 1);
   }
   return days;
@@ -68,7 +68,7 @@ document.querySelectorAll('#app-calendar .day').forEach(day => {
 
 
 
-const past = (year, pastMonth) => {
+const showCalculation = (year, pastMonth) => {
 	calendar.innerHTML = '';
 	days = getDaysInMonthUTC(pastMonth, year);
   monthLong = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date(Date.UTC(year, pastMonth, 1)));
@@ -91,17 +91,36 @@ const past = (year, pastMonth) => {
 	}
 }
 
-
+const calendarCalculator = (year, month) => {
+	showCalculation(year, month);
+}
 
 previous.addEventListener("click", () => {
 	let totallMonth = month -= 1;
 	let currentYear;
-	if(totallMonth == 1){
+	if(totallMonth < 1){
 		month = 12;
+		totallMonth = 12;
 		currentYear = year -= 1;
 	}else{
-		totallYear = year;
+		currentYear = year;
 	}
-	past(totallYear, totallMonth);
+	calendarCalculator(currentYear, totallMonth);
 });
 
+
+future.addEventListener("click", () => {
+	let totallMonth = month += 1;
+	let currentYear;
+	if(totallMonth > 12){
+		month = 1;
+		totallMonth = 1;
+		currentYear = year += 1;
+	}else{
+		currentYear = year;
+	}
+	calendarCalculator(currentYear, totallMonth);
+});
+
+
+console.log(new Date(Date.UTC(2021, 12, 1)));
