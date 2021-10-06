@@ -25,3 +25,31 @@ export const getDaysInMonthUTC = (month, year) => {
   }
   return days;
 }
+
+
+export const showCalculation = (year, pastMonth) => {
+  calendar.innerHTML = '';
+  days = getDaysInMonthUTC(pastMonth, year);
+  monthLong = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date(Date.UTC(year, pastMonth, 1)));
+  monthName.innerHTML = '';
+  monthName.insertAdjacentHTML("beforeend",`<h1>${monthLong}<br/>${year}</h1>`);
+
+  for (let day = 1; day <= days.length; day++){
+
+    const weekend = isWeekend(day);
+    const today = isToday(day);
+
+    let name = '';
+
+    if(day <= 7){
+      const dayName = getDayName(year, pastMonth, day);
+      name = `<div class="name">${dayName}</div>`
+    }
+
+    calendar.insertAdjacentHTML("beforeend", `<div class="day ${weekend ? "weekend" : ""} ${today ? "selected" : ""}">${name}${day}</div>`);
+  }
+}
+
+export const calendarCalculator = (year, month) => {
+  showCalculation(year, month);
+}
