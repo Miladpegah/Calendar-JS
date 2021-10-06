@@ -3,6 +3,11 @@ export const isWeekend = day => {
 	return day % 7 === 6 || day % 7 === 0
 }
 
+export const isToday = day => {
+  let now = new Date().getDate();
+  return day === now;
+}
+
 export const getDayName = day => {
 	const date = new Date(Date.UTC(2021, 9, day));
 
