@@ -32,8 +32,12 @@ const getDayName = (yearNum, monthNum, day) => {
 const getDaysInMonthUTC = (month, year) => {
   let date = new Date(Date.UTC(year, month, 1));
   let days = [];
+  if(month == 12){
+  	month = 0;
+  }
   while (date.getUTCMonth() === month) {
     days.push(date.getDate());
+
     date.setUTCDate(date.getUTCDate() + 1);
   }
   return days;
@@ -123,4 +127,4 @@ future.addEventListener("click", () => {
 });
 
 
-console.log(new Date(Date.UTC(2021, 12, 1)));
+// console.log(new Date(Date.UTC(2021, 12, 1)));
