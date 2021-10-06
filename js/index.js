@@ -42,7 +42,7 @@ const getDaysInMonthUTC = (month, year) => {
 let days = getDaysInMonthUTC(month, year);
 
 
-monthName.insertAdjacentHTML("beforeend",`<h1>${monthLong}</h1>`);
+monthName.insertAdjacentHTML("beforeend",`<h1>${monthLong}<br/>${year}</h1>`);
 
 for (let day = 1; day <= days.length; day++){
 
@@ -73,7 +73,7 @@ const showCalculation = (year, pastMonth) => {
 	days = getDaysInMonthUTC(pastMonth, year);
   monthLong = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date(Date.UTC(year, pastMonth, 1)));
 	monthName.innerHTML = '';
-	monthName.insertAdjacentHTML("beforeend",`<h1>${monthLong}</h1>`);
+	monthName.insertAdjacentHTML("beforeend",`<h1>${monthLong}<br/>${year}</h1>`);
 
 	for (let day = 1; day <= days.length; day++){
 
