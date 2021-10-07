@@ -1,6 +1,7 @@
 :root {
 	--ligth-gray: #DADCE0;
 	--ligth-blue: #1B9CE2;
+	--ligth-sea-green: #20B2AA;
 }
 .header{
 	display: grid;
@@ -59,5 +60,14 @@ a {
 .selected {
 	background-color: var(--ligth-blue);
 	color: white;
+}
+
+.today {
+	background-color: var(--ligth-sea-green);
+	color: white;
+}
+
+.root {
+	width: 100%;
 }
 
