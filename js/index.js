@@ -38,7 +38,7 @@ for (let day = 1; day <= days.length; day++){
 			${name}
 			${day}
 			${weekend ? "<br/><p style='color:#FFA500'>weekend</p>" : ""}
-			${today ? "<h3 style='color:#773073'>today</h3>" : ""}
+			${today ? "<h3 style='color:#9af467'>today</h3>" : ""}
 		</div>`
 	);
 }

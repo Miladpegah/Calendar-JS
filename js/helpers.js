@@ -43,8 +43,8 @@ export const showCalculation = (year, pastMonth) => {
 
   for (let day = 1; day <= days.length; day++){
 
-    const weekend = isWeekend(day);
-    const today = isToday(day);
+    const weekend = isWeekend(year, pastMonth, day);
+    const today = isToday(year, pastMonth, day);
 
     let name = '';
 
@@ -53,15 +53,15 @@ export const showCalculation = (year, pastMonth) => {
       name = `<div class="name">${dayName}</div>`
     }
 
-    calendar.insertAdjacentHTML("beforeend", `<div class="day ${weekend ? "weekend" : ""} ${today ? "selected" : ""}">${name}${day}</div>`);
-  }
-}
+    calendar.insertAdjacentHTML(
+      "beforeend",
+      `<div class="day ${weekend ? "weekend" : ""} ${today ? "today" : ""}">
+        ${name}
+        ${day}
+        ${weekend ? "<br/><p style='color:#FFA500'>weekend</p>" : ""}
+        ${today ? "<h3 style='color:#9af467'>today</h3>" : ""}
 
-export const calendarCalculator = (year, month) => {
-  showCalculation(year, month);
-  document.querySelectorAll('#app-calendar .day').forEach(day => {
-    day.addEventListener("click", event => {
-      event.currentTarget.classList.toggle("selected");
-    });
-  });
+      </div>`
+    );
+  }
 }
