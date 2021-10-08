@@ -3,9 +3,16 @@ export const isWeekend = day => {
 	return day % 7 === 6 || day % 7 === 0
 }
 
-export const isToday = day => {
-  let now = new Date().getDate();
-  return day === now;
+export const isToday = (year, month, day) => {
+  let utcYear = new Date().getFullYear();
+  let utcMonth = new Date().getMonth();
+  let utcDay = new Date().getDate();
+  let utcDate = utcYear+'.'+utcMonth+'.'+utcDay;
+  let utcYear2 = new Date(year, month, day).getFullYear();
+  let utcMonth2 = new Date(year, month, day).getMonth();
+  let utcDay2 = new Date(year, month, day).getDate();
+  let utcDate2 = utcYear2+'.'+utcMonth2+'.'+utcDay2;
+  return utcDate === utcDate2;
 }
 
 export const getDayName = day => {

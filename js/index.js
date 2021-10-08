@@ -13,14 +13,21 @@ let year = new Date().getFullYear();
 let month = new Date().getMonth();
 let monthLong = new Intl.DateTimeFormat("en-US", { month: "long" }).format(new Date(Date.UTC(year, month, 1)));
 
-const isWeekend = day => {
+const isWeekend = (year, month, day) => {
 	// 6 when it's saturday, 0 when it's sunday
 	return new Date(year, month, day).getDay() % 7 === 6 || new Date(year, month, day).getDay() % 7 === 0
 }
 
-const isToday = day => {
-	let now = new Date().getDate();
-	return day === now;
+const isToday = (year, month, day) => {
+	let utcYear = new Date().getFullYear();
+	let utcMonth = new Date().getMonth();
+	let utcDay = new Date().getDate();
+	let utcDate = utcYear+'.'+utcMonth+'.'+utcDay;
+	let utcYear2 = new Date(year, month, day).getFullYear();
+	let utcMonth2 = new Date(year, month, day).getMonth();
+	let utcDay2 = new Date(year, month, day).getDate();
+	let utcDate2 = utcYear2+'.'+utcMonth2+'.'+utcDay2;
+	return utcDate === utcDate2;
 }
 
 const getDayName = (yearNum, monthNum, day) => {
@@ -45,40 +52,6 @@ const getDaysInMonthUTC = (month, year) => {
   return days;
 }
 
-let days = getDaysInMonthUTC(month, year);
-
-
-monthName.insertAdjacentHTML("beforeend",`<h1>${monthLong}<br/>${year}</h1>`);
-
-for (let day = 1; day <= days.length; day++){
-
-	const weekend = isWeekend(day);
-	const today = isToday(day);
-
-	let name = '';
-
-	if(day <= 7){
-		const dayName = getDayName(year, month,day);
-		name = `<div class="name">${dayName}</div>`
-	}
-
-	calendar.insertAdjacentHTML("beforeend",
-			`<div class="day ${weekend ? "weekend" : ""} ${today ? "today" : ""}">
-				${name}
-				${day}
-				${weekend ? "<br/><p style='color:#FFA500'>weekend</p>" : ""}
-			</div>`);
-}
-
-document.querySelectorAll('#app-calendar .day').forEach(day => {
-	day.addEventListener("click", event => {
-		event.currentTarget.classList.toggle("selected");
-	});
-});
-
-
-
-
 const showCalculation = (year, pastMonth) => {
 	calendar.innerHTML = '';
 	days = getDaysInMonthUTC(pastMonth, year);
@@ -88,8 +61,8 @@ const showCalculation = (year, pastMonth) => {
 
 	for (let day = 1; day <= days.length; day++){
 
-		const weekend = isWeekend(day);
-		const today = isToday(day);
+		const weekend = isWeekend(year, pastMonth, day);
+		const today = isToday(year, pastMonth, day);
 
 		let name = '';
 
@@ -98,13 +71,54 @@ const showCalculation = (year, pastMonth) => {
 			name = `<div class="name">${dayName}</div>`
 		}
 
-		calendar.insertAdjacentHTML("beforeend", `<div class="day ${weekend ? "weekend" : ""} ${today ? "today" : ""}">${name}${day}</div>`);
+		calendar.insertAdjacentHTML(
+			"beforeend",
+			`<div class="day ${weekend ? "weekend" : ""} ${today ? "today" : ""}">
+				${name}
+				${day}
+				${weekend ? "<br/><p style='color:#FFA500'>weekend</p>" : ""}
+			</div>`
+		);
 	}
 }
 
 const calendarCalculator = (year, month) => {
 	showCalculation(year, month);
 }
+
+let days = getDaysInMonthUTC(month, year);
+
+
+monthName.insertAdjacentHTML("beforeend",`<h1>${monthLong}<br/>${year}</h1>`);
+
+for (let day = 1; day <= days.length; day++){
+
+	const weekend = isWeekend(year, month, day);
+	const today = isToday(year, month, day);
+
+	let name = '';
+
+	if(day <= 7){
+		const dayName = getDayName(year, month,day);
+		name = `<div class="name">${dayName}</div>`
+	}
+
+	calendar.insertAdjacentHTML(
+		"beforeend",
+		`<div class="day ${weekend ? "weekend" : ""} ${today ? "today" : ""}">
+			${name}
+			${day}
+			${weekend ? "<br/><p style='color:#FFA500'>weekend</p>" : ""}
+		</div>`
+	);
+}
+
+document.querySelectorAll('#app-calendar .day').forEach(day => {
+	day.addEventListener("click", event => {
+		event.currentTarget.classList.toggle("selected");
+	});
+});
+
 
 previous.addEventListener("click", () => {
 	let totallMonth = month -= 1;
