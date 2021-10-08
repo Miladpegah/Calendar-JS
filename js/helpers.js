@@ -59,4 +59,9 @@ export const showCalculation = (year, pastMonth) => {
 
 export const calendarCalculator = (year, month) => {
   showCalculation(year, month);
+  document.querySelectorAll('#app-calendar .day').forEach(day => {
+    day.addEventListener("click", event => {
+      event.currentTarget.classList.toggle("selected");
+    });
+  });
 }

@@ -84,6 +84,11 @@ const showCalculation = (year, pastMonth) => {
 
 const calendarCalculator = (year, month) => {
 	showCalculation(year, month);
+	document.querySelectorAll('#app-calendar .day').forEach(day => {
+		day.addEventListener("click", event => {
+			event.currentTarget.classList.toggle("selected");
+		});
+	});
 }
 
 let days = getDaysInMonthUTC(month, year);
@@ -113,12 +118,6 @@ for (let day = 1; day <= days.length; day++){
 	);
 }
 
-document.querySelectorAll('#app-calendar .day').forEach(day => {
-	day.addEventListener("click", event => {
-		event.currentTarget.classList.toggle("selected");
-	});
-});
-
 
 previous.addEventListener("click", () => {
 	let totallMonth = month -= 1;
@@ -147,5 +146,11 @@ future.addEventListener("click", () => {
 	calendarCalculator(currentYear, totallMonth);
 });
 
+
+document.querySelectorAll('#app-calendar .day').forEach(day => {
+	day.addEventListener("click", event => {
+		event.currentTarget.classList.toggle("selected");
+	});
+});
 
 // console.log(new Date(Date.UTC(2021, 12, 1)));
